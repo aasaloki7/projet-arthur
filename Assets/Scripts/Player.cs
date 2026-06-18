@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+public class Player : MonoBehaviour {
+    [SerializeField] private Rigidbody rigidbodyPlayer;
+    [SerializeField] private float moveForce;
+
+    public void Move(Vector2 moveVector2)
     {
-        
+        rigidbodyPlayer.AddForce(moveVector2.x * moveForce, 0, 0);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Jump(Vector2 jumpVector2)
     {
-        
+        rigidbodyPlayer.AddForce(jumpVector2.x = 0, y * moveForce, 0);
     }
 }
