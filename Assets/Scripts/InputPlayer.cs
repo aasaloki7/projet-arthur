@@ -13,63 +13,49 @@ public class InputPlayer : MonoBehaviour
 
     public Vector2 moveVector2 = new Vector2();
 
+    // Update
+    
     private void Update()
     {
-        Move();
+        if (moveInputActionReference.action.ReadValue<Vector2>().magnitude > 0)
+            Move();
     }
 
+    // Move
+    
     private void Move()
     {
         moveVector2 = moveInputActionReference.action.ReadValue<Vector2>();
         player.Move(moveVector2);
     }
 
+    
+    
+    // Jump
 
-    void Jump(InputAction.CallbackContext callbackContext)
-
-    private void Update()
+    private void Jump(InputAction.CallbackContext callbackContext)
     {
-        Jump();
+        player.Jump(callbackContext.ReadValueAsButton());
     }
-
-    private void Jump()
-    {
-        throw new NotImplementedException();
-    }
+    
 
     private void OnEnable()
     {
+        moveInputActionReference.action.Enable();
         jumpInputActionReference.action.Enable();
         jumpInputActionReference.action.performed += Jump;
     }
 
     private void OnDisable()
     {
+        moveInputActionReference.action.Disable();
         jumpInputActionReference.action.Disable();
         jumpInputActionReference.action.performed -= Jump;
     }
 }
 
 
+// Attacks
 
 
 
-
-
-
-
-
-
-
-
-//private void OnEnable() {
-        //moveInputActionReference.action.Enable();
-        // moveInputActionReference.action.performed += Move;
-    //}
-
-    //private void OnDisable()
-    //{
-        //moveInputActionReference.action.Disable();
-        // moveInputActionReference.action.performed -= Move;
-    //}
-//}
